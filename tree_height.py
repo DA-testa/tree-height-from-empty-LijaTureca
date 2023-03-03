@@ -5,7 +5,7 @@ from array import *
 
 
 def compute_height(parArr):
-    attendancy = array('i') 
+    attendancy = {} 
     max_height = 0
     i=0
     while i<len(parArr):
