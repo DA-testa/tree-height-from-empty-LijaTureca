@@ -1,48 +1,50 @@
-# python3
-
+import sys
+import threading
 import re
 from array import *
+import numpy as np
 
-
-def compute_height(parArr):
-    attendancy = {} 
-    max_height = 0
-    i=0
-    while i<len(parArr):
-        parent = parArr[i]
+def compute_height(n, parents):
     
-        if parent == -1:
-             attendancy[i] = 1
-        elif parArr[parent] != -1:
-            if parArr[parent] in attendancy:
-                path = path + attendancy[parArr[parent]]
-                attendancy[i] = path 
-                if path > max_height:
-                 max_height = path
-                 path = 1
-                        
-                 parent = parArr[parent]
-                 path += 1 
-        else:
-             attendancy[i] = path 
-             if path > max_height:
-                max_height = path
-                path = 1         
-    i += 1
-    return max_height      
-    
+    heights = np.zeros(n, dtype=int)
+    tree_height = 0
 
+    def calculate_height(i):
+        if heights[i] != 0:
+            return heights[i]
+
+        if parents[i] == -1:
+            heights[i] = 1
+            return 1
+        parent_height = calculate_height(parents[i])
+        height = parent_height + 1
+        heights[i] = height
+        return height
+    for j in range(n):
+        node_height = calculate_height(j)
+        if node_height > tree_height:
+            tree_height = node_height
+
+    return tree_height
 
 def main():
+    
+
     command=input()
-    parArr=array('i')
+    
+    parents=array('i')
+    # n=int(input())
+    # parents=input()
+    # a=re.split(' ',parents)
+    # for x in a: 
+    #     parents.append(int(x))
     
     if 'I' in command:
-        # nodeCount=int(input())
+        n=int(input())
         parents=input()
         a=re.split(' ',parents)
         for x in a: 
-             parArr.append(int(x))
+             parents.append(int(x))
 
     
     if 'F' in command:
@@ -52,20 +54,21 @@ def main():
             print("wrong file name")
         else:
             with open(name,"r") as file:
-                # node_Count=file.readline()
+                n=int(file.readline())
                 lines=file.readlines()
                 nodes=lines[1:]
                 for nodes in lines:
                     a=re.split(' ',nodes)
                     for x in a:
-                     parArr.append(int(x))
+                     parents.append(int(x))
+                    #  print(parArr)
     
-    height=compute_height(parArr)
+    height=compute_height(n,parents)
     print(height)
+#     sys.setrecursionlimit(10**7)  # max depth of recursion
+# threading.stack_size(2**27)   # new thread will get stack of such size
+# threading.Thread(target=main).start()
+
 
 if __name__ == "__main__":
      main()
-    
-   
-
-
