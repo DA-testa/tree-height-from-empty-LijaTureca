@@ -13,7 +13,7 @@ def compute_height(parArr):
     
         if parent == -1:
              attendancy[i] = 1
-    elif parArr[parent] != -1:
+        elif parArr[parent] != -1:
             if parArr[parent] in attendancy:
                 path = path + attendancy[parArr[parent]]
                 attendancy[i] = path 
@@ -23,11 +23,11 @@ def compute_height(parArr):
                         
                  parent = parArr[parent]
                  path += 1 
-    else:
-         attendancy[i] = path 
-         if path > max_height:
-            max_height = path
-            path = 1         
+        else:
+             attendancy[i] = path 
+             if path > max_height:
+                max_height = path
+                path = 1         
     i += 1
     return max_height      
     
