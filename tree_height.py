@@ -41,8 +41,8 @@ def main():
     
     if 'I' in command:
         n=int(input())
-        parents=input()
-        a=re.split(' ',parents)
+        par=input()
+        a=re.split(' ',par)
         for x in a: 
              parents.append(int(x))
 
