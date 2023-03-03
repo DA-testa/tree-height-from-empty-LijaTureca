@@ -24,7 +24,7 @@ def compute_height(parArr):
                 parent = parArr[parent]
                 path += 1
                 print(attendancy)
-        else:
+     else:
              attendancy[i] = path 
              if path > max_height:
                 max_height = path
