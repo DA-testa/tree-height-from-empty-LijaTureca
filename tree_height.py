@@ -9,9 +9,9 @@ def compute_height(parArr):
     max_height = 0
     i=0
     while i<len(parArr):
-       parent = parArr[i]
+        parent = parArr[i]
     
-    if parent == -1:
+        if parent == -1:
              attendancy[i] = 1
     elif parArr[parent] != -1:
             if parArr[parent] in attendancy:
@@ -21,18 +21,14 @@ def compute_height(parArr):
                  max_height = path
                  path = 1
                         
-                parent = parArr[parent]
-                path += 1
-                print(attendancy)
+                 parent = parArr[parent]
+                 path += 1 
     else:
-             attendancy[i] = path 
-             if path > max_height:
-                max_height = path
-                path = 1
-                print(attendancy)
-                        
+         attendancy[i] = path 
+         if path > max_height:
+            max_height = path
+            path = 1         
     i += 1
-    print(attendancy)
     return max_height      
     
 
