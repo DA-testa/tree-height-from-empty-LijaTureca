@@ -1,30 +1,75 @@
 # python3
 
-import sys
-import threading
+import re
+from array import *
 
 
-def compute_height(n, parents):
-    # Write this function
+def compute_height(parArr):
+    attendancy = array('i') 
     max_height = 0
-    # Your code here
-    return max_height
+    i=0
+    while i<len(parArr):
+       parent = parArr[i]
+    
+    if parent == -1:
+             attendancy[i] = 1
+    elif parArr[parent] != -1:
+            if parArr[parent] in attendancy:
+                path = path + attendancy[parArr[parent]]
+                attendancy[i] = path 
+                if path > max_height:
+                 max_height = path
+                 path = 1
+                        
+                parent = parArr[parent]
+                path += 1
+                print(attendancy)
+        else:
+             attendancy[i] = path 
+             if path > max_height:
+                max_height = path
+                path = 1
+                print(attendancy)
+                        
+    i += 1
+    print(attendancy)
+    return max_height      
+    
 
 
 def main():
-    # implement input form keyboard and from files
+    command=input()
+    parArr=array('i')
     
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
+    if 'I' in command:
+        # nodeCount=int(input())
+        parents=input()
+        a=re.split(' ',parents)
+        for x in a: 
+             parArr.append(int(x))
+
     
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
+    if 'F' in command:
+        file=input()
+        name="test/"+file
+        if 'a' in file:
+            print("wrong file name")
+        else:
+            with open(name,"r") as file:
+                # node_Count=file.readline()
+                lines=file.readlines()
+                nodes=lines[1:]
+                for nodes in lines:
+                    a=re.split(' ',nodes)
+                    for x in a:
+                     parArr.append(int(x))
+    
+    height=compute_height(parArr)
+    print(height)
+
+if __name__ == "__main__":
+     main()
+    
+   
 
 
-# In Python, the default limit on recursion depth is rather low,
-# so raise it here for this problem. Note that to take advantage
-# of bigger stack, we have to launch the computation in a new thread.
-sys.setrecursionlimit(10**7)  # max depth of recursion
-threading.stack_size(2**27)   # new thread will get stack of such size
-threading.Thread(target=main).start()
