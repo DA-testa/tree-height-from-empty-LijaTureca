@@ -9,16 +9,16 @@ def compute_height(n, parents):
     heights = np.zeros(n, dtype=int)
     tree_height = 0
 
-    def calculate_height(i):
-        if heights[i] != 0:
-            return heights[i]
+    def calculate_height(n):
+        if heights[n] != 0:
+            return heights[n]
 
-        if parents[i] == -1:
-            heights[i] = 1
+        if parents[n] == -1:
+            heights[n] = 1
             return 1
-        parent_height = calculate_height(parents[i])
+        parent_height = calculate_height(parents[n])
         height = parent_height + 1
-        heights[i] = height
+        heights[n] = height
         return height
     for j in range(n):
         node_height = calculate_height(j)
