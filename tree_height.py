@@ -5,25 +5,24 @@ from array import *
 import numpy as np
 
 def compute_height(n, parents):
-    
-    heights = np.zeros(n, dtype=int)
+    heights = np.zeros(n,dtype=int)
     tree_height = 0
-
-    def calculate_height(n):
-        if heights[n] != 0:
-            return heights[n]
-
-        if parents[n] == -1:
-            heights[n] = 1
-            return 1
-        parent_height = calculate_height(parents[n])
-        height = parent_height + 1
-        heights[n] = height
-        return height
-    for j in range(n):
-        node_height = calculate_height(j)
-        if node_height > tree_height:
-            tree_height = node_height
+    
+    for i in range(n):
+        height = 0
+        par_of_i = i
+        while par_of_i != -1:
+            if heights[par_of_i] != 0:
+                height += heights[par_of_i]
+                break 
+            else:
+                height += 1
+                par_of_i = parents[par_of_i]
+                
+        heights[i] = height
+        
+        if height > tree_height:
+            tree_height = height
 
     return tree_height
 
