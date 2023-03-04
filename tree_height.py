@@ -28,17 +28,8 @@ def compute_height(n, parents):
     return tree_height
 
 def main():
-    
-
     command=input()
-    
     parents=array('i')
-    # n=int(input())
-    # parents=input()
-    # a=re.split(' ',parents)
-    # for x in a: 
-    #     parents.append(int(x))
-    
     if 'I' in command:
         n=int(input())
         par=input()
@@ -61,14 +52,13 @@ def main():
                     a=re.split(' ',nodes)
                     for x in a:
                      parents.append(int(x))
-                    #  print(parArr)
+                   
     
     height=compute_height(n,parents)
     print(height)
-#     sys.setrecursionlimit(10**7)  # max depth of recursion
-# threading.stack_size(2**27)   # new thread will get stack of such size
-# threading.Thread(target=main).start()
+    
+sys.setrecursionlimit(10**7)  # max depth of recursion
+threading.stack_size(2**27)   # new thread will get stack of such size
+threading.Thread(target=main).start()
 
 
-if __name__ == "__main__":
-     main()
